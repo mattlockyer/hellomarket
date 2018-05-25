@@ -9,7 +9,7 @@ const contracts = [
 contracts.forEach(c => c.artifact = artifacts.require('./' + c.name + '.sol'))
 
 // tools for overloaded function calls
-const web3Utils = require('web3-utils');
+//const web3Utils = require('web3-utils');
 
 /**************************************
 * Helpers
@@ -19,12 +19,6 @@ const logEvent = (func) => {
   const event = func({ _from: web3.eth.coinbase }, { fromBlock: 0, toBlock: 'latest' });
   event.watch(function(error, result){
     console.log(' * ' + result.event);
-    if (result.args._from) console.log(result.args._from);
-    if (result.args._to) console.log(result.args._to);
-    if (result.args._tokenId) console.log(result.args._tokenId.toNumber());
-    if (result.args._nftpContract) console.log(result.args._nftpContract);
-    if (result.args._nftpTokenId) console.log(result.args._nftpTokenId.toNumber());
-    if (result.args._data) console.log(result.args._data);
   });
 }
 const promisify = (inner) => new Promise((resolve, reject) =>
@@ -40,7 +34,7 @@ const timeout = ms => new Promise(res => setTimeout(res, ms))
 * Tests
 **************************************/
 
-contract(contracts[0].name, function(accounts) {
+contract('HelloMarket', function(accounts) {
   
   let helloMarket,
     alice = accounts[0],
@@ -49,7 +43,7 @@ contract(contracts[0].name, function(accounts) {
   const aliceMessage = 'Hello World!';
   const bobMessage = 'Goodbye World!'
   
-  it('should be deployed, ' + contracts[0].name, async () => {
+  it('should be deployed, HelloMarket', async () => {
     helloMarket = await contracts[0].artifact.deployed();
     assert(helloMarket !== undefined, contracts[0].name + ' was not deployed');
   });

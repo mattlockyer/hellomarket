@@ -9,7 +9,7 @@ const contracts = [
 contracts.forEach(c => c.artifact = artifacts.require('./' + c.name + '.sol'))
 
 // tools for overloaded function calls
-const web3Utils = require('web3-utils');
+//const web3Utils = require('web3-utils');
 
 /**************************************
 * Helpers
