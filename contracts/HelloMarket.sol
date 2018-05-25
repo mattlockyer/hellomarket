@@ -5,20 +5,16 @@
 pragma solidity ^0.4.21;
 
 
+import './Owner.sol';
 
-contract HelloMarket {
+
+contract HelloMarket is Owner {
   
-  address public owner;
   uint256 public price;
   string public message;
   
   constructor() public {
     owner = msg.sender;
-  }
-  
-  modifier onlyOwner() {
-    require(msg.sender == owner);
-    _;
   }
   
   event Talk(string _message, address _from);

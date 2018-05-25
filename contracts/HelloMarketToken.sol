@@ -4,24 +4,18 @@
 
 pragma solidity ^0.4.21;
 
-contract HelloMarketToken {
+import './SimpleToken.sol';
+
+contract HelloMarketToken is SimpleToken {
   
-  address public owner;
   string public message;
   
   //token data
   uint256 public talkFund;
-  uint256 public totalSupply;
-  mapping(address => uint256) public balances;
   
   //hello market functions
   constructor() public {
     owner = msg.sender;
-  }
-  
-  modifier onlyOwner() {
-    require(msg.sender == owner);
-    _;
   }
   
   event Talk(string _message, address _from);
@@ -35,19 +29,6 @@ contract HelloMarketToken {
     emit Talk(_message, msg.sender);
   }
   
-  //token functions
-  function mint(address _to, uint256 _amount) public onlyOwner returns (bool) {
-    totalSupply += _amount;
-    balances[_to] += _amount;
-    return true;
-  }
-  
-  function transfer(address _to, uint256 _amount) public returns (bool) {
-    require(balances[msg.sender] >= _amount);
-    balances[msg.sender] -= _amount;
-    balances[_to] += _amount;
-    return true;
-  }
 }
 
 /**************************************

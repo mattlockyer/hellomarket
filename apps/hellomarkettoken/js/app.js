@@ -45,6 +45,18 @@ const App = {
       console.log(msg);
     }
     
+    //transfer ownership to bob
+    qs('#transfer-owner-alice').onclick = async () => {
+      
+      try {
+        const tx = await HelloMarketToken.contract.transferOwnership(qs('#transfer-owner-address-alice').value, {
+          from: this.alice
+        });
+      } catch(e) {
+        alert('Whoops, looks like you do not own the mint!');
+      }
+    }
+    
     qs('#talk-bob').onclick = async () => {
       try {
         const tx = await HelloMarketToken.contract.talk(qs('#msg-bob').value, {
@@ -65,6 +77,15 @@ const App = {
       qs('#mint-amount').value = ''; //clear immediately
       setTimeout(() => this.updateData(), 1000);
     }
+    
+    qs('#mint-bob').onclick = async () => {
+      const tx = await HelloMarketToken.contract.mint(this.bob, qs('#mint-bob-amount').value, {
+        from: this.bob,
+      });
+      qs('#mint-bob-amount').value = ''; //clear immediately
+      setTimeout(() => this.updateData(), 1000);
+    }
+    
     
     qs('#transfer').onclick = async () => {
       const tx = await HelloMarketToken.contract.transfer(qs('#transfer-to').value, qs('#transfer-amount').value, {

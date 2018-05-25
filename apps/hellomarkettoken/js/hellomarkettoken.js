@@ -6,7 +6,8 @@
 
 const config = {
   host: 'http://127.0.0.1:9545/',
-  contractAddress: '0x50a7be0d6df8f0da1a89f908786484cfc8fa6ef8'
+  //contractAddress: '0x36C80895E5C46b9c1D03ce47953349bf3A9422c7'
+  contractAddress:null
 }
 
 const HelloMarketToken = {

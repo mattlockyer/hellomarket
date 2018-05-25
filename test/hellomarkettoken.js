@@ -91,10 +91,24 @@ contract(contracts[0].name, function(accounts) {
     }
   });
   
-  it('should let Alice transfer tokens to Bob', async () => {
-    const tx = await helloMarketToken.transfer(bob, 400, { from: alice });
+  // it('should let Alice transfer tokens to Bob', async () => {
+  //   const tx = await helloMarketToken.transfer(bob, 400, { from: alice });
+  //   const balance = await helloMarketToken.balances.call(bob);
+  //   assert(balance.equals(400), 'Alice could not transfer tokens to Bob');
+  // });
+  
+  
+  it('should let Alice transfer minting power to bob', async () => {
+    const tx = await helloMarketToken.transferOwnership(bob, { from: alice });
+    const owner = await helloMarketToken.owner.call();
+    assert(owner === bob, 'Alice could not transfer ownership to Bob');
+  });
+  
+  
+  it('should let Bob (owner) mint tokens, for herself', async () => {
+    const tx = await helloMarketToken.mint(bob, 400, { from:bob });
     const balance = await helloMarketToken.balances.call(bob);
-    assert(balance.equals(400), 'Alice could not transfer tokens to Bob');
+    assert(balance.equals(400), 'Alice could not mint tokens');
   });
   
   it('should let Bob set the message', async () => {
@@ -107,6 +121,7 @@ contract(contracts[0].name, function(accounts) {
     const balance = await helloMarketToken.balances.call(bob);
     assert(balance.equals(300), 'Bob\'s balance was not decremented after talking');
   });
+  
   
 });
 
