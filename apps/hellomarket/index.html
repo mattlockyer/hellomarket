@@ -1,0 +1,68 @@
+
+
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Hello Market</title>
+
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css">
+  <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
+  <link rel="stylesheet" href="../shared/css/app.css">
+  
+  <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
+  <script src="https://cdn.rawgit.com/trufflesuite/truffle-contract/develop/dist/truffle-contract.js"></script>
+
+</head>
+
+<body>
+  
+  <div class="pure-g">
+    
+    <div class="padding-16 pure-u-1 pure-u-sm-1-3">
+      <h4>Alice</h4>
+      <div id="balance-alice"></div>
+      
+      <h5>Say Something</h5>
+      <input id="msg-alice" />
+      <button id="talk-alice">Talk</button>
+      
+      <h5>Buy Rights</h5>
+      <input id="price-alice" type="number" />
+      <button id="buy-alice">Buy</button>
+    </div>
+    
+    <div id="bob" class="padding-16 pure-u-1 pure-u-sm-1-3">
+      <h4>Bob</h4>
+      <div id="balance-bob"></div>
+      
+      <h5>Say Something</h5>
+      <input id="msg-bob" />
+      <button id="talk-bob">Talk</button>
+      
+      <h5>Buy Rights</h5>
+      <input id="price-bob" type="number" />
+      <button id="buy-bob">Buy</button>
+    </div>
+    
+    <div class="padding-16 pure-u-1 pure-u-sm-1-3">
+      <h4>Message:</h4>
+      <p id="msg"></p>
+      
+      <h4>Owner:</h4>
+      <p id="owner"></p>
+      
+      <h4>Price:</h4>
+      <p id="price"></p>
+    </div>
+    
+  </div>
+  
+  <script src="../shared/js/helpers.js"></script>
+  <script src="js/hellomarket.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
