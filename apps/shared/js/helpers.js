@@ -18,6 +18,7 @@ const Helpers = {
     }
     window.web3 = new Web3(web3Provider);
   },
+  
   async getContract(json, address, web3 = window.web3) {
     const contract = TruffleContract(json);
     contract.setProvider(web3.currentProvider);

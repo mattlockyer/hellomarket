@@ -45,11 +45,13 @@ contract('HelloMarket', function(accounts) {
   
   it('should be deployed, HelloMarket', async () => {
     helloMarket = await contracts[0].artifact.deployed();
-    assert(helloMarket !== undefined, contracts[0].name + ' was not deployed');
+    assert(helloMarket.address !== undefined, contracts[0].name + ' was not deployed');
   });
   
   it('should let Alice set the message', async () => {
-    const tx = await helloMarket.talk(aliceMessage);
+    const tx = await helloMarket.talk(aliceMessage, {
+      from: alice
+    });
     const message = await helloMarket.message.call();
     assert(message === aliceMessage, 'Alice could not set the message');
   });
@@ -57,7 +59,7 @@ contract('HelloMarket', function(accounts) {
   it('should NOT let Bob set the message', async () => {
     try {
       const tx = await helloMarket.talk(bobMessage, { from: bob });
-      assert(true, 'Bob set the message, should NOT have');
+      assert(false, 'Bob set the message, should NOT have');
     } catch (e) {
       const message = await helloMarket.message.call();
       assert(message === aliceMessage, 'Bob set the message, should NOT have');
@@ -65,15 +67,24 @@ contract('HelloMarket', function(accounts) {
   });
   
   it('should let Bob buy ownership rights by sending value greater than 0', async () => {
-    const tx = await helloMarket.buyRights({ from: bob, value: 1 });
+    
+    
+    const tx = await helloMarket.buyRights({
+      from: bob,
+      value: 1000
+      
+    });
     const owner = await helloMarket.owner.call();
+    
     assert(owner === bob, 'Bob could not buy rights');
+  
+    
   });
   
   it('should let Bob set the message', async () => {
     const tx = await helloMarket.talk(bobMessage, { from: bob });
     const message = await helloMarket.message.call();
-    assert(message === bobMessage, 'Bob could not set the message');
+    assert(message === 'Goodbye World!', 'Bob could not set the message');
   });
   
   it('should NOT let Alice set the message', async () => {
@@ -85,6 +96,7 @@ contract('HelloMarket', function(accounts) {
       assert(message === bobMessage, 'Alice set the message, should NOT have');
     }
   });
+  
   
 });
 

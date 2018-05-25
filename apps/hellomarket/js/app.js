@@ -3,7 +3,9 @@
 //jshint ignore: start
 
 const qs = (sel) => document.querySelector(sel);
+
 window.onload = () => App.init();
+
 const toEth = (bn) => Math.round(web3.fromWei(bn) * 10000, 4) / 10000;
 const toWei = (eth) => web3.toWei(eth, 'ether');
 
@@ -16,6 +18,9 @@ const App = {
     await HelloMarket.init();
     
     const { accounts } = web3.eth;
+    
+    console.log(accounts);
+    
     this.users = ['alice'];
     this.alice = accounts[0];
     
@@ -31,6 +36,7 @@ const App = {
   },
   
   setEventListeners() {
+    
     //setting the message
     qs('#talk-alice').onclick = async () => {
       try {
